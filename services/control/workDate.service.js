@@ -20,7 +20,6 @@ module.exports = class WorkDateService extends BaseService {
         { workStatus: true },
         { workStatus: false }
       );
-      console.log("UpdateMany result:", result);
       entity.workStartTime = formatDateTime(entity.workStartTime);
       entity.workEndTime = formatDateTime(entity.workEndTime);
       const createdEntity = await _workDate.create(entity);

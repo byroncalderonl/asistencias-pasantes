@@ -33,13 +33,11 @@ module.exports = class UserService extends BaseService {
   async loginUser(email, password) {
     const user = await _user.findOne({ userEmail: email });
     if (!user) {
-      console.log("User not found");
       throw new AppError("Invalid email or password", 401);
     }
 
     const isMatch = await bcrypt.compare(password, user.userPassword);
     if (!isMatch) {
-      console.log("Password does not match");
       throw new AppError("Invalid email or password", 401);
     }
 
@@ -51,11 +49,11 @@ module.exports = class UserService extends BaseService {
   }
 
   async logoutUser(token) {
-    revokedTokens.add(token); // Agregar el token a la lista de tokens revocados
+    revokedTokens.add(token); 
     return true;
   }
 
   isTokenRevoked(token) {
-    return revokedTokens.has(token); // Verificar si el token está revocado
+    return revokedTokens.has(token); 
   }
 };

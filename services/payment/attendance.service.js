@@ -58,10 +58,6 @@ module.exports = class AttendanceService extends BaseService {
     const workStartTime = formatDateTime(workDate.workStartTime);
     const workEndTime = formatDateTime(workDate.workEndTime);
 
-    console.log("Current Time:", currentTime);
-    console.log("Work Start Time:", workStartTime);
-    console.log("Work End Time:", workEndTime);
-
     if (currentTime < workStartTime || currentTime > workEndTime) {
       throw new AppError("Current time is outside of work hours", 400);
     }
@@ -96,11 +92,7 @@ module.exports = class AttendanceService extends BaseService {
 
     const workStartTime = formatDateTime(workDate.workStartTime);
     const workEndTime = formatDateTime(workDate.workEndTime);
-
-    console.log("Current Time:", currentTime);
-    console.log("Work Start Time:", workStartTime);
-    console.log("Work End Time:", workEndTime);
-
+    
     if (currentTime < workStartTime || currentTime > workEndTime) {
       throw new AppError("Current time is outside of work hours", 400);
     }
