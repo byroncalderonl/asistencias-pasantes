@@ -31,4 +31,13 @@ module.exports = class AttendanceController extends BaseController {
       data: attendance,
     });
   });
+
+    findAllWithUserFilters = catchControllerAsync(async (req, res) => {
+      const result = await _attendanceService.findAllWithUserFilters(req.query);
+      return appResponse(res, {
+        status: "success",
+        message: "Attendance filtered by userName retrieved successfully",
+        data: result,
+      });
+    });
 };

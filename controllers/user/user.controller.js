@@ -51,4 +51,22 @@ module.exports = class UserController extends BaseController {
       data: null,
     });
   });
+
+  getAll = catchControllerAsync(async (req, res) => {
+    const users = await _userService.getAllUsersWithRoles();
+    return appResponse(res, {
+      status: "success",
+      message: "Users retrieved successfully",
+      data: users,
+    });
+  });
+
+  findAllWithRolFilters = catchControllerAsync(async (req, res) => {
+    const result = await _userService.findAllWithRolFilters(req.query);
+    return appResponse(res, {
+      status: "success",
+      message: "Users filtered by role retrieved successfully",
+      data: result,
+    });
+  });
 };
