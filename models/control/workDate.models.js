@@ -1,15 +1,25 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const moment = require("moment-timezone");
 
 const workDateSchema = new Schema(
   {
     workStartTime: {
-      type: Date,
+      type: String,
       required: true,
+      set: (date) =>
+        moment.tz(date, "America/Guayaquil").format("YYYY-MM-DD HH:mm:ss"),
     },
     workEndTime: {
-      type: Date,
+      type: String,
       required: true,
+      set: (date) =>
+        moment.tz(date, "America/Guayaquil").format("YYYY-MM-DD HH:mm:ss"),
+    },
+    workStatus: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
   },
   {

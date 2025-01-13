@@ -11,6 +11,10 @@ const rolSchema = new Schema(
       type: String,
       required: true,
     },
+    rolStatus: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,

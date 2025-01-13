@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const moment = require("moment-timezone");
 
 const attendanceSchema = new Schema(
   {
@@ -9,22 +10,33 @@ const attendanceSchema = new Schema(
       required: true,
     },
     attendanceDate: {
-      type: Date,
+      type: String,
       required: true,
+      set: (date) =>
+        moment.tz(date, "America/Guayaquil").format("YYYY-MM-DD HH:mm:ss"),
     },
     checkInTime: {
-      type: Date,
+      type: String,
+      set: (date) =>
+        moment.tz(date, "America/Guayaquil").format("YYYY-MM-DD HH:mm:ss"),
     },
     checkOutTime: {
-      type: Date,
+      type: String,
+      set: (date) =>
+        moment.tz(date, "America/Guayaquil").format("YYYY-MM-DD HH:mm:ss"),
     },
     lunchBreak: {
       type: Boolean,
       default: false,
     },
-    attended: {
+    attendanceStatus: {
       type: Boolean,
+      default: false,
       required: true,
+    },
+    attendanceCard: {
+      type: String,
+      default: "default",
     },
   },
   {

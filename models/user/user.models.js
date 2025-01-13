@@ -1,5 +1,5 @@
-const mongose = require("mongoose");
-const { Schema } = mongose;
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -7,9 +7,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    userLastName: {
+      type: String,
+      required: true,
+    },
     userEmail: {
       type: String,
       required: true,
+      unique: true,
     },
     userPassword: {
       type: String,
@@ -20,6 +25,10 @@ const userSchema = new Schema(
       ref: "Rol",
       required: true,
     },
+    codeCard: {
+      type: String,
+      unique: true,
+    },
   },
   {
     timestamps: true,
@@ -27,4 +36,7 @@ const userSchema = new Schema(
   }
 );
 
-module.exports = mongose.model("User", userSchema);
+userSchema.index({ userEmail: 1 }, { unique: true });
+userSchema.index({ codeCard: 1 }, { unique: true });
+
+module.exports = mongoose.model("User", userSchema);

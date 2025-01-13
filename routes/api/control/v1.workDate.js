@@ -10,5 +10,8 @@ module.exports = function ({ WorkDateController }) {
   router.put("/update/:id", WorkDateController.update);
   router.delete("/delete/:id", WorkDateController.delete);
 
+  router.post("/create-workdate", WorkDateController.createWorkDate);
+  router.put("/update-workdate/:id", WorkDateController.updateWorkDate);
+
   return router;
 };

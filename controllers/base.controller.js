@@ -61,7 +61,7 @@ module.exports = class BaseController {
       data: null,
     });
   });
-
+  
   findAllWithFilters = catchControllerAsync(async (req, res) => {
     const result = await this.service.findAllWithFilters(req.query);
     return appResponse(res, {

@@ -7,6 +7,7 @@ module.exports = function ({ AttendanceController }) {
   router.get("/filter", AttendanceController.findAllWithFilters);
   router.get("/get/:id", AttendanceController.getOne);
   router.post("/create", AttendanceController.create);
+  router.post("/create-card", AttendanceController.registerAttendance);
   router.put("/update/:id", AttendanceController.update);
   router.delete("/delete/:id", AttendanceController.delete);
 

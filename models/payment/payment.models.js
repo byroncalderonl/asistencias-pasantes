@@ -24,6 +24,11 @@ const paymentSchema = new Schema(
       type: String,
       required: true,
     },
+    paymentRemuneration: {
+      type: Schema.Types.ObjectId,
+      ref: "Remuneration",
+      required: true,
+    },
     paymentStatus: {
       type: Boolean,
       required: true,

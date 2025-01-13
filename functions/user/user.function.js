@@ -7,4 +7,14 @@ module.exports = class UserFunctions extends BaseFunctions {
     super(User);
     _user = User;
   }
+
+  // getPopulateFields() {
+  //   return ["userRol"];
+  // }
+
+  // getReferenceAttributes() {
+  //   return {
+  //     userRol: ["rolName", "rolDescription"],
+  //   };
+  // }
 };
