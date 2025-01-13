@@ -13,7 +13,6 @@ module.exports = class UserController extends BaseController {
   createUser = catchControllerAsync(async (req, res) => {
     const user = await _userService.createUser(req.body);
     return appResponse(res, {
-      statusCode: 201,
       status: "success",
       message: "User created successfully",
       data: user,
@@ -24,7 +23,6 @@ module.exports = class UserController extends BaseController {
     const { id } = req.params;
     const user = await _userService.updateUser(id, req.body);
     return appResponse(res, {
-      statusCode: 200,
       status: "success",
       message: "User updated successfully",
       data: user,
@@ -38,7 +36,6 @@ module.exports = class UserController extends BaseController {
       userPassword
     );
     return appResponse(res, {
-      statusCode: 200,
       status: "success",
       message: "User logged in successfully",
       data: { user, token },
@@ -49,7 +46,6 @@ module.exports = class UserController extends BaseController {
     const { token } = req.body;
     await _userService.logoutUser(token);
     return appResponse(res, {
-      statusCode: 200,
       status: "success",
       message: "User logged out successfully",
       data: null,
