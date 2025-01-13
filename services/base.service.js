@@ -59,6 +59,8 @@ module.exports = class BaseService {
     return deletedEntity;
   });
 
+  //funcional
+
   findAllWithFilters = catchServiceAsync(async (filters) => {
     const { query, limit, skip } = await this.functions.buildSearchQuery(
       filters
@@ -73,4 +75,26 @@ module.exports = class BaseService {
 
     return { result, totalCount };
   });
+
+  //experimental
+  // findAllWithFilters = catchServiceAsync(async (filters) => {
+  //   const { query, limit, skip, populate, select } =
+  //     await this.functions.buildSearchQueryWithPopulate(filters);
+
+  //   const totalCount = await this.model.countDocuments(query);
+  //   let resultQuery = this.model
+  //     .find(query)
+  //     .sort({ createdAt: -1 })
+  //     .limit(limit)
+  //     .skip(skip);
+  //   if (populate.length) {
+  //     resultQuery = resultQuery.populate(populate);
+  //   }
+  //   if (select) {
+  //     resultQuery = resultQuery.select(select);
+  //   }
+  //   const result = await resultQuery;
+
+  //   return { result, totalCount };
+  // });
 };
