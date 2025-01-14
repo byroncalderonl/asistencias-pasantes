@@ -61,22 +61,6 @@ module.exports = class UserService extends BaseService {
     return await _user.find().populate("userRol", "rolName rolDescription");
   }
 
-  // async findAllWithRolFilters(filters) {
-  //   const { query, limit, skip } = await this.functions.buildSearchQueryAllRol(
-  //     filters
-  //   );
-
-  //   const totalCount = await this.model.countDocuments(query);
-  //   const result = await this.model
-  //     .find(query)
-  //     .populate("userRol", "rolName rolDescription")
-  //     .sort({ createdAt: -1 })
-  //     .limit(limit)
-  //     .skip(skip);
-
-  //   return { result, totalCount };
-  // }
-
   async findAllWithRolFilters(filters) {
     const { query, limit, skip, rolName } =
       await this.functions.buildSearchQueryAllRol(filters);
@@ -93,7 +77,6 @@ module.exports = class UserService extends BaseService {
       .limit(limit)
       .skip(skip);
 
-    // Filtrar los resultados que no coinciden con el rolName
     const filteredResult = result.filter((user) => user.userRol);
 
     return { result: filteredResult, totalCount: filteredResult.length };

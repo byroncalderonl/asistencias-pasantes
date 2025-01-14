@@ -14,7 +14,6 @@ module.exports = class AttendanceController extends BaseController {
     const { body } = req;
     const result = await _attendanceService.create(body);
     return appResponse(res, {
-      statusCode: 201,
       status: "success",
       message: "Entity created successfully",
       data: result,
@@ -25,7 +24,6 @@ module.exports = class AttendanceController extends BaseController {
     const { codeCard } = req.body;
     const attendance = await _attendanceService.registerAttendance(codeCard);
     return appResponse(res, {
-      statusCode: 201,
       status: "success",
       message: "Attendance registered successfully",
       data: attendance,

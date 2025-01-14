@@ -117,7 +117,9 @@ module.exports = class AttendanceService extends BaseService {
   });
 
   async getAllAttendanceWithUser() {
-    return await _attendance.find().populate("attendanceUser", "userName userLastName");
+    return await _attendance
+      .find()
+      .populate("attendanceUser", "userName userLastName");
   }
 
   async findAllWithUserFilters(filters) {
@@ -129,9 +131,14 @@ module.exports = class AttendanceService extends BaseService {
       .find(query)
       .populate({
         path: "attendanceUser",
-        match: userName
-          ? { userName: { $regex: userName, $options: "i" } }
-          : {},
+        match: {
+          ...(userName
+            ? { userName: { $regex: userName, $options: "i" } }
+            : {}),
+          ...(userLastName
+            ? { userLastName: { $regex: userLastName, $options: "i" } }
+            : {}),
+        },
         select: "userName userLastName",
       })
       .sort({ createdAt: -1 })

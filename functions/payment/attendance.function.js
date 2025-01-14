@@ -8,21 +8,6 @@ module.exports = class AttendanceFunctions extends BaseFunctions {
     _attendance = Attendance;
   }
 
-  // getPopulateFields() {
-  //   return ["attendanceUser", "paymentRemuneration"];
-  // }
-
-  // getReferenceAttributes() {
-  //   return {
-  //     attendanceUser: ["userName", "userLastName", "userEmail"],
-  //     paymentRemuneration: [
-  //       "remunerationAmount",
-  //       "remunerationDescription",
-  //       "remunerationUser",
-  //     ],
-  //   };
-  // }
-
   buildSearchQueryAllUser= async (searchData) => {
     const { limit = 10, page = 1, ...filters } = searchData;
 
@@ -34,7 +19,7 @@ module.exports = class AttendanceFunctions extends BaseFunctions {
       } else if (value === "true" || value === "false") {
         acc[key] = value === "true";
       } else if (typeof value === "string" && value.trim() !== "") {
-        if (key !== "userName") {
+        if (key !== "userName" && key !== "userLastName") {
           acc[key] = { $regex: value, $options: "i" };
         }
       }
@@ -48,6 +33,7 @@ module.exports = class AttendanceFunctions extends BaseFunctions {
       skip,
       limit: parseInt(limit, 10),
       userName: filters.userName,
+      userLastName: filters.userLastName,
     };
   };
 };
