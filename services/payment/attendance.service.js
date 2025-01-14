@@ -92,7 +92,7 @@ module.exports = class AttendanceService extends BaseService {
 
     const workStartTime = formatDateTime(workDate.workStartTime);
     const workEndTime = formatDateTime(workDate.workEndTime);
-    
+
     if (currentTime < workStartTime || currentTime > workEndTime) {
       throw new AppError("Current time is outside of work hours", 400);
     }
@@ -115,4 +115,38 @@ module.exports = class AttendanceService extends BaseService {
     entity.checkInTime = currentTime;
     return await this.model.create(entity);
   });
+
+  async getAllAttendanceWithUser() {
+    return await _attendance
+      .find()
+      .populate("attendanceUser", "userName userLastName");
+  }
+
+  async findAllWithUserFilters(filters) {
+    const { query, limit, skip, userName, userLastName } =
+      await this.functions.buildSearchQueryAllUser(filters);
+
+    const totalCount = await this.model.countDocuments(query);
+    const result = await this.model
+      .find(query)
+      .populate({
+        path: "attendanceUser",
+        match: {
+          ...(userName
+            ? { userName: { $regex: userName, $options: "i" } }
+            : {}),
+          ...(userLastName
+            ? { userLastName: { $regex: userLastName, $options: "i" } }
+            : {}),
+        },
+        select: "userName userLastName",
+      })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
+
+    const filteredResult = result.filter((user) => user.attendanceUser);
+
+    return { result: filteredResult, totalCount: filteredResult.length };
+  }
 };

@@ -49,11 +49,36 @@ module.exports = class UserService extends BaseService {
   }
 
   async logoutUser(token) {
-    revokedTokens.add(token); 
+    revokedTokens.add(token);
     return true;
   }
 
   isTokenRevoked(token) {
-    return revokedTokens.has(token); 
+    return revokedTokens.has(token);
+  }
+
+  async getAllUsersWithRoles() {
+    return await _user.find().populate("userRol", "rolName rolDescription");
+  }
+
+  async findAllWithRolFilters(filters) {
+    const { query, limit, skip, rolName } =
+      await this.functions.buildSearchQueryAllRol(filters);
+
+    const totalCount = await this.model.countDocuments(query);
+    const result = await this.model
+      .find(query)
+      .populate({
+        path: "userRol",
+        match: rolName ? { rolName: { $regex: rolName, $options: "i" } } : {},
+        select: "rolName rolDescription",
+      })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(skip);
+
+    const filteredResult = result.filter((user) => user.userRol);
+
+    return { result: filteredResult, totalCount: filteredResult.length };
   }
 };

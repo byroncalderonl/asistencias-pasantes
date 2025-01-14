@@ -97,4 +97,6 @@ module.exports = class BaseService {
 
   //   return { result, totalCount };
   // });
+
+  
 };

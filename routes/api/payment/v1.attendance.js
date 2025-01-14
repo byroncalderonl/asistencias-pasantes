@@ -4,7 +4,7 @@ module.exports = function ({ AttendanceController }) {
   const router = Router();
 
   router.get("/get-all", AttendanceController.getAll);
-  router.get("/filter", AttendanceController.findAllWithFilters);
+  router.get("/filter", AttendanceController.findAllWithUserFilters);
   router.get("/get/:id", AttendanceController.getOne);
   router.post("/create", AttendanceController.create);
   router.post("/create-card", AttendanceController.registerAttendance);
