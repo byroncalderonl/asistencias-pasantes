@@ -6,7 +6,8 @@ module.exports = function ({ PaymentController }) {
   router.get("/get-all", PaymentController.getAll);
   router.get("/filter", PaymentController.findAllWithFilters);
   router.get("/get/:id", PaymentController.getOne);
-  router.post("/create", PaymentController.create);
+  // router.post("/create", PaymentController.create);
+  router.post("/create", PaymentController.createPayment);
   router.put("/update/:id", PaymentController.update);
   router.delete("/delete/:id", PaymentController.delete);
 

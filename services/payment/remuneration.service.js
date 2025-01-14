@@ -12,4 +12,28 @@ module.exports = class RemunerationService extends BaseService {
     _remuneration = Remuneration;
     _remunerationFunctions = RemunerationFunctions;
   }
+
+  async createRemuneration(entity, updateOthers = true) {
+    if (entity.remunerationStatus && updateOthers) {
+      const result = await _remuneration.updateMany(
+        { remunerationStatus: true },
+        { remunerationStatus: false }
+      );
+      const createdEntity = await _remuneration.create(entity);
+      return createdEntity;
+    }
+  }
+
+  async updateRemuneration(id, entity, updateOthers = true) {
+    if (entity.remunerationStatus && updateOthers) {
+      const result = await _remuneration.updateMany(
+        { remunerationStatus: true },
+        { remunerationStatus: false }
+      );
+    }
+    const updatedEntity = await _remuneration.findByIdAndUpdate(id, entity, {
+      new: true,
+    });
+    return updatedEntity;
+  }
 };

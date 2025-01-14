@@ -9,4 +9,15 @@ module.exports = class PaymentController extends BaseController {
     super(PaymentService);
     _paymentService = PaymentService;
   }
+
+  createPayment = catchControllerAsync(async (req, res) => {
+    const { body } = req;
+    const result = await _paymentService.createPayment(body);
+    return appResponse(res, {
+      statusCode: 201,
+      status: "success",
+      message: "Payment created successfully",
+      data: result,
+    });
+  });
 };

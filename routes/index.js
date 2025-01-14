@@ -27,7 +27,7 @@ module.exports = function ({
   apiRouter.use("/payment", PaymentRoutes);
   apiRouter.use("/remuneration", RemunerationRoutes);
   apiRouter.use("/ip", IpRoutes);
-  apiRouter.use("/workDate", WorkDateRoutes);
+  apiRouter.use("/work-date", WorkDateRoutes);
 
   router.use("/v1/api", apiRouter);
   router.use("/", (req, res) => {

@@ -8,11 +8,11 @@ const paymentSchema = new Schema(
       ref: "User",
       required: true,
     },
-    paymentAmount: {
-      type: Number,
-      required: true,
+    paymentRemuneration: {
+      type: Schema.Types.ObjectId,
+      ref: "Remuneration",
     },
-    paymentHours: {
+    paymentTotal: {
       type: Number,
       required: true,
     },
@@ -22,11 +22,6 @@ const paymentSchema = new Schema(
     },
     paymentDescription: {
       type: String,
-      required: true,
-    },
-    paymentRemuneration: {
-      type: Schema.Types.ObjectId,
-      ref: "Remuneration",
       required: true,
     },
     paymentStatus: {

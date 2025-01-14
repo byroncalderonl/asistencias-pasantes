@@ -28,7 +28,7 @@ module.exports = class WorkDateController extends BaseController {
   async updateWorkDate(req, res) {
     const { id } = req.params;
     const { body } = req;
-    const { updateOthers = true } = body; // Extraer updateOthers del cuerpo de la solicitud
+    const { updateOthers = true } = body;
     const updatedEntity = await _workDateService.updateWorkDate(
       id,
       body,
